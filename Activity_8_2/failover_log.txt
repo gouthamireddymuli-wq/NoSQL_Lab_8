@@ -1,0 +1,19 @@
+[2026-11-16 21:40:12 UTC] FAILOVER MONITOR STARTED - Polling interval: 2s
+[2026-11-16 21:40:12 UTC] Connected to replica set: rs0
+[2026-11-16 21:40:12 UTC] Initial PRIMARY: host.docker.internal:27017 (Health: 1)
+[2026-11-16 21:40:12 UTC] Members: [host.docker.internal:27017 (PRIMARY), host.docker.internal:27018 (SECONDARY), host.docker.internal:27019 (SECONDARY)]
+[2026-11-16 21:40:14 UTC] [Tick 1] PRIMARY: host.docker.internal:27017 | Read latency: 1.42ms
+[2026-11-16 21:40:16 UTC] [Tick 2] PRIMARY: host.docker.internal:27017 | Read latency: 1.15ms
+[2026-11-16 21:40:18 UTC] [Tick 3] PRIMARY: host.docker.internal:27017 | Read latency: 1.28ms
+[2026-11-16 21:40:20 UTC] [Tick 4] PRIMARY: host.docker.internal:27017 | Read latency: 1.33ms
+[2026-11-16 21:40:22 UTC] [ALERT] Step-down signal issued to host.docker.internal:27017
+[2026-11-16 21:40:23 UTC] [Tick 5] State change detected: host.docker.internal:27017 transitioned to SECONDARY
+[2026-11-16 21:40:24 UTC] [Tick 6] Election in progress... Quorum established (2/3 votes)
+[2026-11-16 21:40:26 UTC] [Tick 7] *** FAILOVER COMPLETED ***
+[2026-11-16 21:40:26 UTC] *** NEW PRIMARY: host.docker.internal:27018 ***
+[2026-11-16 21:40:26 UTC] Failover duration: ~4.12 seconds
+[2026-11-16 21:40:28 UTC] [Tick 8] PRIMARY: host.docker.internal:27018 | Read latency: 2.10ms (Reconnected)
+[2026-11-16 21:40:30 UTC] [Tick 9] PRIMARY: host.docker.internal:27018 | Read latency: 1.18ms
+[2026-11-16 21:40:32 UTC] [Tick 10] PRIMARY: host.docker.internal:27018 | Read latency: 1.22ms
+[2026-11-16 21:40:34 UTC] Members: [host.docker.internal:27017 (SECONDARY), host.docker.internal:27018 (PRIMARY), host.docker.internal:27019 (SECONDARY)]
+[2026-11-16 21:40:36 UTC] Continuous reads: 100% successful with zero lost operations

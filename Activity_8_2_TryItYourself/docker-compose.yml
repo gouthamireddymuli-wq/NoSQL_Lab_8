@@ -1,0 +1,67 @@
+version: "3.8"
+
+# ─── Activity 8.2 Try It Yourself — MongoDB Replica Set (Priority-based Election)
+# Ports:
+#   mongo-rs0-1 → localhost:27017  (priority=1, lowest)
+#   mongo-rs0-2 → localhost:27018  (priority=3, HIGHEST → should win)
+#   mongo-rs0-3 → localhost:27019  (priority=2, medium)
+#
+# Usage:
+#   docker-compose up -d
+#   mongosh --port 27017 init_replicaset_priority.js
+# ──────────────────────────────────────────────────────────────────────────────
+
+services:
+  mongo-rs0-1:
+    image: mongo:7
+    container_name: mongo-rs0-1
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    ports:
+      - "27017:27017"
+    volumes:
+      - rs0_data1:/data/db
+    networks:
+      - rs0_net
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  mongo-rs0-2:
+    image: mongo:7
+    container_name: mongo-rs0-2
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    ports:
+      - "27018:27017"
+    volumes:
+      - rs0_data2:/data/db
+    networks:
+      - rs0_net
+    depends_on:
+      mongo-rs0-1:
+        condition: service_healthy
+
+  mongo-rs0-3:
+    image: mongo:7
+    container_name: mongo-rs0-3
+    command: ["mongod", "--replSet", "rs0", "--bind_ip_all"]
+    ports:
+      - "27019:27017"
+    volumes:
+      - rs0_data3:/data/db
+    networks:
+      - rs0_net
+    depends_on:
+      mongo-rs0-1:
+        condition: service_healthy
+
+volumes:
+  rs0_data1:
+  rs0_data2:
+  rs0_data3:
+
+networks:
+  rs0_net:
+    driver: bridge
